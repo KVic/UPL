@@ -9,6 +9,7 @@ Project {
     property path ExamplePath: "../../example/"
 
     references: [
-         ExamplePath + "WeakUnique/project/qbs/WeakUnique.qbs"
+          ExamplePath + "WeakUnique/project/qbs/WeakUnique.qbs"
+        , ExamplePath + "TransferUnique/project/qbs/TransferUnique.qbs"
     ]
 }
