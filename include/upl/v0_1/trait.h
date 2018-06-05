@@ -31,6 +31,13 @@ inline namespace v0_1
 namespace trait
 {
 template <class T>
+struct element
+{
+    static_assert(sizeof(T) == -1,
+                  "element is not defined for the T");
+};
+
+template <class T>
 struct ownership
 {
     static_assert(sizeof(T) == -1,
@@ -43,6 +50,9 @@ struct multiplicity
     static_assert(sizeof(T) == -1,
                   "multiplicity is not defined for the T");
 };
+
+template <class T>
+using element_t = typename element<T>::type;
 
 template <class T>
 using ownership_t = typename ownership<T>::type;

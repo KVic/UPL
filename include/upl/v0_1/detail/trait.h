@@ -34,6 +34,22 @@ inline namespace v0_1
 namespace trait
 {
 template <class T, class Multiplicity>
+struct element<upl::detail::counted::weak<T, Multiplicity>>
+{ using type = typename upl::detail::counted::weak<T, Multiplicity>::element_type; };
+
+template <class T, class Multiplicity>
+struct element<upl::detail::counted::unified<T, Multiplicity>>
+{ using type = typename upl::detail::counted::unified<T, Multiplicity>::element_type; };
+
+template <class T, class Multiplicity>
+struct element<upl::detail::counted::unique<T, Multiplicity>>
+{ using type = typename upl::detail::counted::unique<T, Multiplicity>::element_type; };
+
+template <class T, class Multiplicity>
+struct element<upl::detail::counted::shared<T, Multiplicity>>
+{ using type = typename upl::detail::counted::shared<T, Multiplicity>::element_type; };
+
+template <class T, class Multiplicity>
 struct ownership<upl::detail::counted::weak<T, Multiplicity>>
 { using type = tag::weak; };
 
