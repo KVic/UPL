@@ -66,40 +66,52 @@ inline constexpr bool BasePointer =
     && (  std::is_same_v<Multiplicity, upl::tag::any>
        || internal::MultiplicityPointer<P, Multiplicity>);
 
+template <class P, class T = void>
 inline constexpr bool Pointer =
-    internal::OwnershipPointer<P, internal::tag::owner_based>;
+    internal::BasePointer<P>
+    && internal::PointerOfElement<P, T>;
 
-template <class P>
+template <class P, class T = void>
 inline constexpr bool StrongPointer =
-    internal::OwnershipPointer<P, internal::tag::strong>;
+    internal::OwnershipPointer<P, internal::tag::strong>
+    && internal::PointerOfElement<P, T>;
 
-template <class P>
+template <class P, class T = void>
 inline constexpr bool WeakPointer =
-    internal::OwnershipPointer<P, internal::tag::weak>;
+    internal::OwnershipPointer<P, internal::tag::weak>
+    && internal::PointerOfElement<P, T>;
 
-template <class P>
+template <class P, class T = void>
 inline constexpr bool UnifiedPointer =
-    internal::OwnershipPointer<P, tag::unified>;
+    internal::OwnershipPointer<P, tag::unified>
+    && internal::PointerOfElement<P, T>;
 
-template <class P>
+template <class P, class T = void>
 inline constexpr bool StrictPointer =
-    internal::OwnershipPointer<P, internal::tag::strict>;
+    internal::OwnershipPointer<P, internal::tag::strict>
+    && internal::PointerOfElement<P, T>;
 
-template <class P>
+template <class P, class T = void>
 inline constexpr bool UniquePointer =
-    internal::OwnershipPointer<P, tag::unique>;
+    internal::OwnershipPointer<P, tag::unique>
+    && internal::PointerOfElement<P, T>;
 
-template <class P>
+template <class P, class T = void>
 inline constexpr bool SharedPointer =
-    internal::OwnershipPointer<P, tag::shared>;
+    internal::OwnershipPointer<P, tag::shared>
+    && internal::PointerOfElement<P, T>;
 
-template <class P>
+template <class P, class T = void>
 inline constexpr bool OptionalPointer =
-    internal::MultiplicityPointer<P, tag::optional>;
+    internal::BasePointer<P>
+    && internal::MultiplicityPointer<P, tag::optional>
+    && internal::PointerOfElement<P, T>;
 
-template <class P>
+template <class P, class T = void>
 inline constexpr bool SinglePointer =
-    internal::MultiplicityPointer<P, tag::single>;
+    internal::BasePointer<P>
+    && internal::MultiplicityPointer<P, tag::single>
+    && internal::PointerOfElement<P, T>;
 } // namespace
 } // namespace v0_1
 } // namespace upl
