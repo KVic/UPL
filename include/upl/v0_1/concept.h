@@ -37,6 +37,15 @@ namespace internal
 {
 namespace
 {
+template <class P, class T>
+inline constexpr bool PointerOfElement =
+    std::is_same_v<T, void>
+    || std::is_base_of_v<T, trait::element_t<P>>;
+
+template <class P>
+inline constexpr bool BasePointer =
+    std::is_base_of_v<upl::internal::tag::owner_based, trait::ownership_t<P>>;
+
 template <class P, class Ownership>
 inline constexpr bool OwnershipPointer =
     std::is_base_of_v<Ownership, trait::ownership_t<P>>;
@@ -44,19 +53,19 @@ inline constexpr bool OwnershipPointer =
 template <class P, class Multiplicity>
 inline constexpr bool MultiplicityPointer =
     std::is_base_of_v<Multiplicity, trait::multiplicity_t<P>>;
-
-template <class P, class Ownership, class Multiplicity>
-inline constexpr bool TaggedPointer =
-    (  std::is_same_v<Ownership, upl::tag::any>
-    || OwnershipPointer<P, Ownership>)
-    && (  std::is_same_v<Multiplicity, upl::tag::any>
-       || MultiplicityPointer<P, Multiplicity>);
 } // namespace
 } // namespace internal
 
 namespace
 {
-template <class P>
+template <class P, class Ownership, class Multiplicity>
+inline constexpr bool BasePointer =
+    (  (  std::is_same_v<Ownership, upl::tag::any>
+       && internal::BasePointer<P>)
+    || internal::OwnershipPointer<P, Ownership>)
+    && (  std::is_same_v<Multiplicity, upl::tag::any>
+       || internal::MultiplicityPointer<P, Multiplicity>);
+
 inline constexpr bool Pointer =
     internal::OwnershipPointer<P, internal::tag::owner_based>;
 
