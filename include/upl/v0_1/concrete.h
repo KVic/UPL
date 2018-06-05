@@ -46,6 +46,18 @@ template <class T, class Multiplicity = tag::optional>
 using shared = pointer<T, tag::shared, Multiplicity>;
 
 template <class T>
+using weak_optional = weak<T, tag::optional>;
+
+template <class T>
+using unified_optional = unified<T, tag::optional>;
+
+template <class T>
+using unique_optional = unique<T, tag::optional>;
+
+template <class T>
+using shared_optional = shared<T, tag::optional>;
+
+template <class T>
 using weak_single = weak<T, tag::single>;
 
 template <class T>
