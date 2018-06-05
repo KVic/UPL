@@ -31,6 +31,8 @@
 
 namespace upl
 {
+inline namespace v0_1
+{
 namespace internal
 {
 namespace
@@ -90,4 +92,5 @@ template <class P>
 inline constexpr bool SinglePointer =
     internal::MultiplicityPointer<P, tag::single>;
 } // namespace
+} // namespace v0_1
 } // namespace upl

@@ -28,6 +28,8 @@
 
 namespace upl
 {
+inline namespace v0_1
+{
 template <class T,
           class Ownership = tag::unified,
           class Multiplicity = tag::optional>
@@ -68,4 +70,5 @@ using unique_single = unique<T, tag::single>;
 
 template <class T>
 using shared_single = shared<T, tag::single>;
+} // namespace v0_1
 } // namespace upl

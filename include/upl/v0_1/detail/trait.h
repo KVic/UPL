@@ -29,6 +29,8 @@
 
 namespace upl
 {
+inline namespace v0_1
+{
 namespace trait
 {
 template <class T, class Multiplicity>
@@ -63,4 +65,5 @@ template <class T, class Multiplicity>
 struct multiplicity<upl::detail::counted::shared<T, Multiplicity>>
 { using type = Multiplicity; };
 } // namespace trait
+} // namespace v0_1
 } // namespace upl

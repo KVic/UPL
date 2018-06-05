@@ -28,6 +28,8 @@
 
 namespace upl
 {
+inline namespace v0_1
+{
 namespace bind
 {
 template <class T, class Ownership, class Multiplicity>
@@ -40,4 +42,5 @@ struct pointer
 template <class T, class Ownership, class Multiplicity>
 using pointer_t = typename pointer<T, Ownership, Multiplicity>::type;
 } // namespace bind
+} // namespace v0_1
 } // namespace upl

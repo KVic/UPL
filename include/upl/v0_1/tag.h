@@ -26,6 +26,8 @@
 
 namespace upl
 {
+inline namespace v0_1
+{
 namespace internal
 {
 namespace tag
@@ -49,4 +51,5 @@ struct shared : public internal::tag::strict {};
 struct optional {};
 struct single {};
 } // namespace tag
+} // namespace v0_1
 } // namespace upl

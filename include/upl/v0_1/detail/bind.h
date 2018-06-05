@@ -29,6 +29,8 @@
 
 namespace upl
 {
+inline namespace v0_1
+{
 namespace bind
 {
 template <class T, class Multiplicity>
@@ -47,4 +49,5 @@ template <class T, class Multiplicity>
 struct pointer<T, tag::shared, Multiplicity>
 { using type = upl::detail::counted::shared<T, Multiplicity>; };
 } // namespace bind
+} // namespace v0_1
 } // namespace upl

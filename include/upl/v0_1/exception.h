@@ -28,6 +28,8 @@
 
 namespace upl
 {
+inline namespace v0_1
+{
 struct logic_error : public std::logic_error
 { using std::logic_error::logic_error; };
 
@@ -45,4 +47,5 @@ struct shared_error : public strong_error
 
 struct single_error : public logic_error
 { using logic_error::logic_error; };
+} // namespace v0_1
 } // namespace upl

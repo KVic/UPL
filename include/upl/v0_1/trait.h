@@ -26,6 +26,8 @@
 
 namespace upl
 {
+inline namespace v0_1
+{
 namespace trait
 {
 template <class T>
@@ -48,4 +50,5 @@ using ownership_t = typename ownership<T>::type;
 template <class T>
 using multiplicity_t = typename multiplicity<T>::type;
 } // namespace trait
+} // namespace v0_1
 } // namespace upl
