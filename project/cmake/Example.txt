@@ -7,3 +7,4 @@ set(EXAMPLE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../example)
 
 add_subdirectory(${EXAMPLE_PATH}/WeakUnique/project/cmake example/WeakUnique)
 add_subdirectory(${EXAMPLE_PATH}/TransferUnique/project/cmake example/TransferUnique)
+add_subdirectory(${EXAMPLE_PATH}/ConceptPrinter/project/cmake example/ConceptPrinter)
