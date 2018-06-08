@@ -40,6 +40,7 @@ namespace
 template <class P, class T>
 inline constexpr bool PointerOfElement =
     std::is_same_v<T, void>
+    || std::is_same_v<T, trait::element_t<P>>
     || std::is_base_of_v<T, trait::element_t<P>>;
 
 template <class P>
