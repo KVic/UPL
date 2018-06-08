@@ -11,5 +11,6 @@ Project {
     references: [
           ExamplePath + "WeakUnique/project/qbs/WeakUnique.qbs"
         , ExamplePath + "TransferUnique/project/qbs/TransferUnique.qbs"
+        , ExamplePath + "ConceptPrinter/project/qbs/ConceptPrinter.qbs"
     ]
 }
