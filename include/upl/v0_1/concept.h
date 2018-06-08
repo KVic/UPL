@@ -26,6 +26,7 @@
 
 #include <upl/v0_1/tag.h>
 #include <upl/v0_1/trait.h>
+#include <upl/v0_1/utility/concept.h>
 
 #include <type_traits>
 
@@ -38,21 +39,21 @@ namespace internal
 namespace
 {
 template <class P, class T>
-inline constexpr bool PointerOfElement =
+UPL_CONCEPT_SPECIFIER PointerOfElement =
     std::is_same_v<T, void>
     || std::is_same_v<T, trait::element_t<P>>
     || std::is_base_of_v<T, trait::element_t<P>>;
 
 template <class P>
-inline constexpr bool BasePointer =
+UPL_CONCEPT_SPECIFIER BasePointer =
     std::is_base_of_v<upl::internal::tag::owner_based, trait::ownership_t<P>>;
 
 template <class P, class Ownership>
-inline constexpr bool OwnershipPointer =
+UPL_CONCEPT_SPECIFIER OwnershipPointer =
     std::is_base_of_v<Ownership, trait::ownership_t<P>>;
 
 template <class P, class Multiplicity>
-inline constexpr bool MultiplicityPointer =
+UPL_CONCEPT_SPECIFIER MultiplicityPointer =
     std::is_base_of_v<Multiplicity, trait::multiplicity_t<P>>;
 } // namespace
 } // namespace internal
@@ -60,7 +61,7 @@ inline constexpr bool MultiplicityPointer =
 namespace
 {
 template <class P, class Ownership, class Multiplicity>
-inline constexpr bool BasePointer =
+UPL_CONCEPT_SPECIFIER BasePointer =
     (  (  std::is_same_v<Ownership, upl::tag::any>
        && internal::BasePointer<P>)
     || internal::OwnershipPointer<P, Ownership>)
@@ -68,48 +69,48 @@ inline constexpr bool BasePointer =
        || internal::MultiplicityPointer<P, Multiplicity>);
 
 template <class P, class T = void>
-inline constexpr bool Pointer =
+UPL_CONCEPT_SPECIFIER Pointer =
     internal::BasePointer<P>
     && internal::PointerOfElement<P, T>;
 
 template <class P, class T = void>
-inline constexpr bool StrongPointer =
+UPL_CONCEPT_SPECIFIER StrongPointer =
     internal::OwnershipPointer<P, internal::tag::strong>
     && internal::PointerOfElement<P, T>;
 
 template <class P, class T = void>
-inline constexpr bool WeakPointer =
+UPL_CONCEPT_SPECIFIER WeakPointer =
     internal::OwnershipPointer<P, internal::tag::weak>
     && internal::PointerOfElement<P, T>;
 
 template <class P, class T = void>
-inline constexpr bool UnifiedPointer =
+UPL_CONCEPT_SPECIFIER UnifiedPointer =
     internal::OwnershipPointer<P, tag::unified>
     && internal::PointerOfElement<P, T>;
 
 template <class P, class T = void>
-inline constexpr bool StrictPointer =
+UPL_CONCEPT_SPECIFIER StrictPointer =
     internal::OwnershipPointer<P, internal::tag::strict>
     && internal::PointerOfElement<P, T>;
 
 template <class P, class T = void>
-inline constexpr bool UniquePointer =
+UPL_CONCEPT_SPECIFIER UniquePointer =
     internal::OwnershipPointer<P, tag::unique>
     && internal::PointerOfElement<P, T>;
 
 template <class P, class T = void>
-inline constexpr bool SharedPointer =
+UPL_CONCEPT_SPECIFIER SharedPointer =
     internal::OwnershipPointer<P, tag::shared>
     && internal::PointerOfElement<P, T>;
 
 template <class P, class T = void>
-inline constexpr bool OptionalPointer =
+UPL_CONCEPT_SPECIFIER OptionalPointer =
     internal::BasePointer<P>
     && internal::MultiplicityPointer<P, tag::optional>
     && internal::PointerOfElement<P, T>;
 
 template <class P, class T = void>
-inline constexpr bool SinglePointer =
+UPL_CONCEPT_SPECIFIER SinglePointer =
     internal::BasePointer<P>
     && internal::MultiplicityPointer<P, tag::single>
     && internal::PointerOfElement<P, T>;

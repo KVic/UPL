@@ -31,6 +31,12 @@
 
 #define UPL_NAME_BY_LINE(Name) UPL_WORD_CONCAT(Name, __LINE__)
 
+#if defined (__cpp_concepts)
+#define UPL_CONCEPT_SPECIFIER concept bool
+#else
+#define UPL_CONCEPT_SPECIFIER inline constexpr bool
+#endif
+
 #define UPL_CONCEPT_REQUIRES(...)                                              \
 template <bool UPL_NAME_BY_LINE(_UPL_Requires_) = true,                        \
           typename std::enable_if_t<                                           \
