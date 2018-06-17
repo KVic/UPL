@@ -77,6 +77,7 @@ int main()
 
 * [Справка](Reference.md)
 * [Теоретическая основа](TheoreticalBasis.md)
+* [Примеры](https://gitlab.com/UnifiedPointers/Complex/Example)
 
 # Использование библиотеки
 
