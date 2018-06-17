@@ -693,7 +693,7 @@ public:
     // Copy operators.
     unified& operator=(const unified& other) noexcept
     {
-        return this->operator=<internal::strong, T>(
+        return this->template operator=<internal::strong, T>(
             static_cast<const internal::strong<T, multiplicity_type>&>(other));
     }
 
@@ -736,7 +736,7 @@ public:
 
     // Move operators.
     unified& operator=(unified&& other) noexcept
-    { return this->operator=<unified, T>(std::move(other)); }
+    { return this->template operator=<unified, T>(std::move(other)); }
 
     template <template <class Y, class M> class Counted, class Y, class M,
               UPL_CONCEPT_REQUIRES_(  IsCompatible<Y>
@@ -931,7 +931,7 @@ public:
 
     // Move operators.
     unique& operator=(unique&& other) noexcept
-    { return this->operator=<unique, T>(std::move(other)); }
+    { return this->template operator=<unique, T>(std::move(other)); }
 
     template <template <class Y, class M> class Counted, class Y, class M,
               UPL_CONCEPT_REQUIRES_(  IsCompatible<Y>
@@ -1089,7 +1089,7 @@ public:
     // Copy operators.
     shared& operator=(const shared& other) noexcept
     {
-        return this->operator=<internal::base, T>(
+        return this->template operator=<internal::base, T>(
             static_cast<const internal::base<T, multiplicity_type>&>(other));
     }
 
@@ -1126,7 +1126,7 @@ public:
 
     // Move operators.
     shared& operator=(shared&& other) noexcept
-    { return this->operator=<shared, T>(std::move(other)); }
+    { return this->template operator=<shared, T>(std::move(other)); }
 
     template <template <class Y, class M> class Counted, class Y, class M,
               UPL_CONCEPT_REQUIRES_(IsCompatible<Y>)>
@@ -1225,7 +1225,7 @@ public:
     // Copy operators.
     weak& operator=(const weak& other) noexcept
     {
-        return this->operator=<internal::base, T>(
+        return this->template operator=<internal::base, T>(
             static_cast<const internal::base<T, multiplicity_type>&>(other));
     }
 
@@ -1249,7 +1249,7 @@ public:
 
     // Move operators.
     weak& operator=(weak&& other) noexcept
-    { return this->operator=<weak, T>(std::move(other)); }
+    { return this->template operator=<weak, T>(std::move(other)); }
 
     template <template <class Y, class M> class Counted, class Y, class M,
               UPL_CONCEPT_REQUIRES_(  IsCompatible<Y>
