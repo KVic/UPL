@@ -24,51 +24,27 @@
 
 #pragma once
 
-#include <upl/v0_1/bind.h>
+#include <upl/v0_1/detail/std_smart.h>
 
 namespace upl
 {
 inline namespace v0_1
 {
-template <class T,
-          class Ownership = tag::unified,
-          class Multiplicity = tag::optional>
-using pointer = bind::pointer_t<T, Ownership, Multiplicity>;
-
-template <class T, class Multiplicity = tag::optional>
-using weak = pointer<T, tag::weak, Multiplicity>;
-
-template <class T, class Multiplicity = tag::optional>
-using unified = pointer<T, tag::unified, Multiplicity>;
-
-template <class T, class Multiplicity = tag::optional>
-using unique = pointer<T, tag::unique, Multiplicity>;
-
-template <class T, class Multiplicity = tag::optional>
-using shared = pointer<T, tag::shared, Multiplicity>;
-
-template <class T>
-using weak_optional = weak<T, tag::optional>;
-
-template <class T>
-using unified_optional = unified<T, tag::optional>;
-
-template <class T>
-using unique_optional = unique<T, tag::optional>;
-
-template <class T>
-using shared_optional = shared<T, tag::optional>;
-
-template <class T>
-using weak_single = weak<T, tag::single>;
-
-template <class T>
-using unified_single = unified<T, tag::single>;
-
-template <class T>
-using unique_single = unique<T, tag::single>;
-
-template <class T>
-using shared_single = shared<T, tag::single>;
+namespace narrow
+{
+using std_smart::pointer;
+using std_smart::weak;
+using std_smart::unified;
+using std_smart::unique;
+using std_smart::shared;
+using std_smart::weak_optional;
+using std_smart::unified_optional;
+using std_smart::unique_optional;
+using std_smart::shared_optional;
+using std_smart::weak_single;
+using std_smart::unified_single;
+using std_smart::unique_single;
+using std_smart::shared_single;
+} // namespace narrow
 } // namespace v0_1
 } // namespace upl

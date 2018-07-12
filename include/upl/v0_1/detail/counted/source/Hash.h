@@ -24,23 +24,34 @@
 
 #pragma once
 
-#include <upl/v0_1/tag.h>
+#include "Counted.h"
 
-namespace upl
+namespace std
 {
-inline namespace v0_1
+template <class T, class Multiplicity>
+struct hash<upl::detail::counted::internal::strong<T, Multiplicity>>
 {
-namespace bind
-{
-template <class T, class Ownership, class Multiplicity>
-struct pointer
-{
-    static_assert(sizeof(T) == -1,
-                  "pointer is not defined for the T");
+    using pointer_type = upl::detail::counted::internal::strong<T, Multiplicity>;
+    using element_type = typename pointer_type::element_type;
+
+    using argument_type = pointer_type;
+    using result_type   = typename hash<element_type*>::result_type;
+
+    result_type operator()(const pointer_type& pointer) const noexcept
+    {
+        return hash<element_type*>()(pointer.get());
+    }
 };
 
-template <class T, class Ownership, class Multiplicity>
-using pointer_t = typename pointer<T, Ownership, Multiplicity>::type;
-} // namespace bind
-} // namespace v0_1
-} // namespace upl
+template <class T, class Multiplicity>
+struct hash<upl::detail::counted::unified<T, Multiplicity>>
+    : public hash<upl::detail::counted::internal::strong<T, Multiplicity>> {};
+
+template <class T, class Multiplicity>
+struct hash<upl::detail::counted::unique<T, Multiplicity>>
+    : public hash<upl::detail::counted::internal::strong<T, Multiplicity>> {};
+
+template <class T, class Multiplicity>
+struct hash<upl::detail::counted::shared<T, Multiplicity>>
+    : public hash<upl::detail::counted::internal::strong<T, Multiplicity>> {};
+} // namespace std

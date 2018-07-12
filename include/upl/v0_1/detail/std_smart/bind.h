@@ -24,34 +24,45 @@
 
 #pragma once
 
-#include <upl/v0_1/detail/counted.h>
+#include <upl/v0_1/detail/std_smart/source/StdSmart.h>
 
-namespace std
+namespace upl
 {
-template <class T, class Multiplicity>
-struct hash<upl::detail::counted::internal::strong<T, Multiplicity>>
+inline namespace v0_1
 {
-    using pointer_type = upl::detail::counted::internal::strong<T, Multiplicity>;
-    using element_type = typename pointer_type::element_type;
-
-    using argument_type = pointer_type;
-    using result_type   = typename hash<element_type*>::result_type;
-
-    result_type operator()(const pointer_type& pointer) const noexcept
-    {
-        return hash<element_type*>()(pointer.get());
-    }
+namespace detail
+{
+namespace std_smart
+{
+namespace bind
+{
+template <class T, class Ownership, class Multiplicity>
+struct pointer
+{
+    static_assert(sizeof(T) == -1,
+                  "pointer is not defined for the T");
 };
 
 template <class T, class Multiplicity>
-struct hash<upl::detail::counted::unified<T, Multiplicity>>
-    : public hash<upl::detail::counted::internal::strong<T, Multiplicity>> {};
+struct pointer<T, tag::weak, Multiplicity>
+{ using type = weak<T, Multiplicity>; };
 
 template <class T, class Multiplicity>
-struct hash<upl::detail::counted::unique<T, Multiplicity>>
-    : public hash<upl::detail::counted::internal::strong<T, Multiplicity>> {};
+struct pointer<T, tag::unified, Multiplicity>
+{ using type = unified<T, Multiplicity>; };
 
 template <class T, class Multiplicity>
-struct hash<upl::detail::counted::shared<T, Multiplicity>>
-    : public hash<upl::detail::counted::internal::strong<T, Multiplicity>> {};
-} // namespace std
+struct pointer<T, tag::unique, Multiplicity>
+{ using type = unique<T, Multiplicity>; };
+
+template <class T, class Multiplicity>
+struct pointer<T, tag::shared, Multiplicity>
+{ using type = shared<T, Multiplicity>; };
+
+template <class T, class Ownership, class Multiplicity>
+using pointer_t = typename pointer<T, Ownership, Multiplicity>::type;
+} // namespace bind
+} // namespace std_smart
+} // namespace detail
+} // namespace v0_1
+} // namespace upl

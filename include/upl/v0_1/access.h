@@ -24,6 +24,51 @@
 
 #pragma once
 
-#include <upl/v0_1/access.h>
-#include <upl/v0_1/concrete/default.h>
-#include <upl/v0_1/utility/unique_carrier.h>
+#include <upl/v0_1/concept.h>
+
+#include <utility>
+
+namespace upl
+{
+inline namespace v0_1
+{
+namespace
+{
+template <class P, UPL_CONCEPT_REQUIRES_(StrongPointer<std::decay_t<P>>)>
+inline
+const P& access(const P& p)
+{
+    return p;
+}
+
+template <class P, UPL_CONCEPT_REQUIRES_(WeakPointer<std::decay_t<P>>)>
+inline
+auto access(P&& p)
+{
+    return p.lock();
+}
+
+template <class P, class SuccessAction>
+inline
+auto access(P&& p, SuccessAction success_action)
+{
+    const auto& accessor = access(std::forward<P>(p));
+    if (accessor)
+        return success_action(*accessor);
+}
+
+template <class P, class SuccessAction, class FailureAction>
+inline
+auto access(P&& p,
+            SuccessAction success_action,
+            FailureAction failure_action)
+{
+    const auto& accessor = access(std::forward<P>(p));
+    if (accessor)
+        return success_action(*accessor);
+    else
+        return failure_action();
+}
+} // namespace
+} // namespace v0_1
+} // namespace upl

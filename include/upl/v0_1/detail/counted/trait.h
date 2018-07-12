@@ -25,7 +25,8 @@
 #pragma once
 
 #include <upl/v0_1/trait.h>
-#include <upl/v0_1/detail/counted.h>
+
+#include <upl/v0_1/detail/counted/source/Counted.h>
 
 namespace upl
 {
@@ -65,21 +66,21 @@ template <class T, class Multiplicity>
 struct ownership<upl::detail::counted::shared<T, Multiplicity>>
 { using type = tag::shared; };
 
-template <class T, class Multiplicity>
-struct multiplicity<upl::detail::counted::weak<T, Multiplicity>>
-{ using type = Multiplicity; };
+template <class T, class Multiplicity_>
+struct multiplicity<upl::detail::counted::weak<T, Multiplicity_>>
+{ using type = Multiplicity_; };
 
-template <class T, class Multiplicity>
-struct multiplicity<upl::detail::counted::unified<T, Multiplicity>>
-{ using type = Multiplicity; };
+template <class T, class Multiplicity_>
+struct multiplicity<upl::detail::counted::unified<T, Multiplicity_>>
+{ using type = Multiplicity_; };
 
-template <class T, class Multiplicity>
-struct multiplicity<upl::detail::counted::unique<T, Multiplicity>>
-{ using type = Multiplicity; };
+template <class T, class Multiplicity_>
+struct multiplicity<upl::detail::counted::unique<T, Multiplicity_>>
+{ using type = Multiplicity_; };
 
-template <class T, class Multiplicity>
-struct multiplicity<upl::detail::counted::shared<T, Multiplicity>>
-{ using type = Multiplicity; };
+template <class T, class Multiplicity_>
+struct multiplicity<upl::detail::counted::shared<T, Multiplicity_>>
+{ using type = Multiplicity_; };
 } // namespace trait
-} // namespace v0_1
+} // inline namespace v0_1
 } // namespace upl

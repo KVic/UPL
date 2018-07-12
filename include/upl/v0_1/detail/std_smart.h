@@ -24,6 +24,9 @@
 
 #pragma once
 
-#include <upl/v0_1/access.h>
-#include <upl/v0_1/concrete/default.h>
-#include <upl/v0_1/utility/unique_carrier.h>
+#include <upl/v0_1/detail/std_smart/source/Comparison.h>
+#include <upl/v0_1/detail/std_smart/source/Hash.h>
+#include <upl/v0_1/detail/std_smart/source/Swap.h>
+
+#include <upl/v0_1/detail/std_smart/concrete.h>
+#include <upl/v0_1/detail/std_smart/trait.h>

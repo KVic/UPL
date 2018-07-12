@@ -24,7 +24,7 @@
 
 #pragma once
 
-#include <upl/v0_1/detail/counted.h>
+#include "StdSmart.h"
 
 #include <functional>
 
@@ -34,7 +34,7 @@ inline namespace v0_1
 {
 namespace detail
 {
-namespace counted
+namespace std_smart
 {
 namespace internal
 {
@@ -139,7 +139,7 @@ inline bool
 operator>=(std::nullptr_t, const strong<T, TM>& a) noexcept
 { return !(nullptr < a); }
 } // namespace internal
-} // namespace counted
+} // namespace std_smart
 } // namespace detail
 } // namespace v0_1
 } // namespace upl

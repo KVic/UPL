@@ -24,6 +24,27 @@
 
 #pragma once
 
-#include <upl/v0_1/access.h>
-#include <upl/v0_1/concrete/default.h>
-#include <upl/v0_1/utility/unique_carrier.h>
+#include <upl/v0_1/detail/counted.h>
+
+namespace upl
+{
+inline namespace v0_1
+{
+namespace wide
+{
+using counted::pointer;
+using counted::weak;
+using counted::unified;
+using counted::unique;
+using counted::shared;
+using counted::weak_optional;
+using counted::unified_optional;
+using counted::unique_optional;
+using counted::shared_optional;
+using counted::weak_single;
+using counted::unified_single;
+using counted::unique_single;
+using counted::shared_single;
+} // namespace wide
+} // namespace v0_1
+} // namespace upl

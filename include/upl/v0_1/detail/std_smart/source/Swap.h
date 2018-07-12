@@ -24,6 +24,36 @@
 
 #pragma once
 
-#include <upl/v0_1/access.h>
-#include <upl/v0_1/concrete/default.h>
-#include <upl/v0_1/utility/unique_carrier.h>
+#include "StdSmart.h"
+
+namespace upl
+{
+inline namespace v0_1
+{
+namespace detail
+{
+namespace std_smart
+{
+template <class T, class Multiplicity>
+inline void swap(shared<T, Multiplicity>& a,
+                 shared<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
+{ a.swap(b); }
+
+template <class T, class Multiplicity>
+inline void swap(unique<T, Multiplicity>& a,
+                 unique<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
+{ a.swap(b); }
+
+template <class T, class Multiplicity>
+inline void swap(unified<T, Multiplicity>& a,
+                 unified<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
+{ a.swap(b); }
+
+template <class T, class Multiplicity>
+inline void swap(weak<T, Multiplicity>& a,
+                 weak<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
+{ a.swap(b); }
+} // namespace std_smart
+} // namespace detail
+} // namespace v0_1
+} // namespace upl

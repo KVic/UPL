@@ -26,7 +26,7 @@
 
 #include <upl/v0_1/tag.h>
 #include <upl/v0_1/trait.h>
-#include <upl/v0_1/utility/concept.h>
+#include <upl/v0_1/detail/std_smart/source/Utility/Concept.h>
 
 #include <type_traits>
 

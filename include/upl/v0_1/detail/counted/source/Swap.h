@@ -24,8 +24,7 @@
 
 #pragma once
 
-#include <upl/v0_1/concept.h>
-#include <upl/v0_1/detail/counted.h>
+#include "Counted.h"
 
 namespace upl
 {
@@ -37,22 +36,22 @@ namespace counted
 {
 template <class T, class Multiplicity>
 inline void swap(shared<T, Multiplicity>& a,
-                 shared<T, Multiplicity>& b) noexcept (OptionalPointer<shared<T, Multiplicity>>)
+                 shared<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
 { a.swap(b); }
 
 template <class T, class Multiplicity>
 inline void swap(unique<T, Multiplicity>& a,
-                 unique<T, Multiplicity>& b) noexcept (OptionalPointer<unique<T, Multiplicity>>)
+                 unique<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
 { a.swap(b); }
 
 template <class T, class Multiplicity>
 inline void swap(unified<T, Multiplicity>& a,
-                 unified<T, Multiplicity>& b) noexcept (OptionalPointer<unified<T, Multiplicity>>)
+                 unified<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
 { a.swap(b); }
 
 template <class T, class Multiplicity>
 inline void swap(weak<T, Multiplicity>& a,
-                 weak<T, Multiplicity>& b) noexcept (OptionalPointer<weak<T, Multiplicity>>)
+                 weak<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
 { a.swap(b); }
 } // namespace counted
 } // namespace detail

@@ -24,6 +24,27 @@
 
 #pragma once
 
-#include <upl/v0_1/access.h>
-#include <upl/v0_1/concrete/default.h>
-#include <upl/v0_1/utility/unique_carrier.h>
+// *INDENT-OFF*
+
+#define UPL_WORD_CONCAT_EXT(Word_1, Word_2) Word_1 ## Word_2
+#define UPL_WORD_CONCAT(Word_1, Word_2) UPL_WORD_CONCAT_EXT(Word_1, Word_2)
+
+#define UPL_NAME_BY_LINE(Name) UPL_WORD_CONCAT(Name, __LINE__)
+
+#if defined (__cpp_concepts)
+#define UPL_CONCEPT_SPECIFIER concept bool
+#else
+#define UPL_CONCEPT_SPECIFIER inline constexpr bool
+#endif
+
+#define UPL_CONCEPT_REQUIRES(...)                                              \
+template <bool UPL_NAME_BY_LINE(_UPL_Requires_) = true,                        \
+          typename std::enable_if_t<                                           \
+              (__VA_ARGS__) && UPL_NAME_BY_LINE(_UPL_Requires_), int> = 0>     \
+
+#define UPL_CONCEPT_REQUIRES_(...)                                             \
+bool UPL_NAME_BY_LINE(_UPL_Requires_) = true,                                  \
+typename std::enable_if_t<                                                     \
+    (__VA_ARGS__) && UPL_NAME_BY_LINE(_UPL_Requires_), int> = 0                \
+
+// *INDENT-ON*

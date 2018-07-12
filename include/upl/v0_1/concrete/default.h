@@ -24,30 +24,12 @@
 
 #pragma once
 
-#include <upl/v0_1/bind.h>
-#include <upl/v0_1/detail/counted.h>
+#include <upl/v0_1/concrete/narrow.h>
 
 namespace upl
 {
 inline namespace v0_1
 {
-namespace bind
-{
-template <class T, class Multiplicity>
-struct pointer<T, tag::weak, Multiplicity>
-{ using type = upl::detail::counted::weak<T, Multiplicity>; };
-
-template <class T, class Multiplicity>
-struct pointer<T, tag::unified, Multiplicity>
-{ using type = upl::detail::counted::unified<T, Multiplicity>; };
-
-template <class T, class Multiplicity>
-struct pointer<T, tag::unique, Multiplicity>
-{ using type = upl::detail::counted::unique<T, Multiplicity>; };
-
-template <class T, class Multiplicity>
-struct pointer<T, tag::shared, Multiplicity>
-{ using type = upl::detail::counted::shared<T, Multiplicity>; };
-} // namespace bind
+using namespace narrow;
 } // namespace v0_1
 } // namespace upl

@@ -24,6 +24,34 @@
 
 #pragma once
 
-#include <upl/v0_1/access.h>
-#include <upl/v0_1/concrete/default.h>
-#include <upl/v0_1/utility/unique_carrier.h>
+#include "StdSmart.h"
+
+namespace std
+{
+template <class T, class Multiplicity>
+struct hash<upl::detail::std_smart::internal::strong<T, Multiplicity>>
+{
+    using pointer_type = upl::detail::std_smart::internal::strong<T, Multiplicity>;
+    using element_type = typename pointer_type::element_type;
+
+    using argument_type = pointer_type;
+    using result_type   = typename hash<element_type*>::result_type;
+
+    result_type operator()(const pointer_type& pointer) const noexcept
+    {
+        return hash<element_type*>()(pointer.get());
+    }
+};
+
+template <class T, class Multiplicity>
+struct hash<upl::detail::std_smart::unified<T, Multiplicity>>
+    : public hash<upl::detail::std_smart::internal::strong<T, Multiplicity>> {};
+
+template <class T, class Multiplicity>
+struct hash<upl::detail::std_smart::unique<T, Multiplicity>>
+    : public hash<upl::detail::std_smart::internal::strong<T, Multiplicity>> {};
+
+template <class T, class Multiplicity>
+struct hash<upl::detail::std_smart::shared<T, Multiplicity>>
+    : public hash<upl::detail::std_smart::internal::strong<T, Multiplicity>> {};
+} // namespace std
