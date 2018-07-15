@@ -26,6 +26,7 @@
 
 #include <upl/v0_1/tag.h>
 #include <upl/v0_1/exception.h>
+#include <upl/v0_1/utility/itself.h>
 
 #include "Utility/Concept.h"
 
@@ -385,11 +386,11 @@ public:
 
     // In-place constructors.
     template <class ... Args, UPL_CONCEPT_REQUIRES_(!std::is_abstract_v<T>)>
-    explicit strict(std::in_place_t, Args&& ... args)
+    explicit strict(itself_t, Args&& ... args)
         : parent{std::make_shared<T>(std::forward<Args>(args) ...)} {}
 
     template <class ... Args, UPL_CONCEPT_REQUIRES_(std::is_abstract_v<T>)>
-    strict(std::in_place_t, Args&& ... args) = delete;
+    strict(itself_t, Args&& ... args) = delete;
 
 protected:
     using parent::strong;

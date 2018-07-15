@@ -26,6 +26,7 @@
 
 #include <upl/v0_1/tag.h>
 #include <upl/v0_1/exception.h>
+#include <upl/v0_1/utility/itself.h>
 
 #include "Utility/Concept.h"
 
@@ -627,12 +628,12 @@ public:
 
     // In-place constructors.
     template <class ... Args, UPL_CONCEPT_REQUIRES_(!std::is_abstract_v<T>)>
-    explicit unified(std::in_place_t, Args&& ... args)
+    explicit unified(itself_t, Args&& ... args)
         : unified<T, multiplicity_type>{new T(std::forward<Args>(args) ...)}
     {}
 
     template <class ... Args, UPL_CONCEPT_REQUIRES_(std::is_abstract_v<T>)>
-    unified(std::in_place_t, Args&& ... args) = delete;
+    unified(itself_t, Args&& ... args) = delete;
 
     // Copy constructors.
     unified(const unified& other) noexcept (parent::IsOptional)
@@ -847,12 +848,12 @@ public:
 
     // In-place constructors.
     template <class ... Args, UPL_CONCEPT_REQUIRES_(!std::is_abstract_v<T>)>
-    explicit unique(std::in_place_t, Args&& ... args)
+    explicit unique(itself_t, Args&& ... args)
         : unique<T, multiplicity_type>{new T(std::forward<Args>(args) ...)}
     {}
 
     template <class ... Args, UPL_CONCEPT_REQUIRES_(std::is_abstract_v<T>)>
-    unique(std::in_place_t, Args&& ... args) = delete;
+    unique(itself_t, Args&& ... args) = delete;
 
     // Copy constructors.
     unique(const unique& other) = delete;
@@ -1028,12 +1029,12 @@ public:
 
     // In-place constructors.
     template <class ... Args, UPL_CONCEPT_REQUIRES_(!std::is_abstract_v<T>)>
-    explicit shared(std::in_place_t, Args&& ... args)
+    explicit shared(itself_t, Args&& ... args)
         : shared<T, multiplicity_type>{new T(std::forward<Args>(args) ...)}
     {}
 
     template <class ... Args, UPL_CONCEPT_REQUIRES_(std::is_abstract_v<T>)>
-    shared(std::in_place_t, Args&& ... args) = delete;
+    shared(itself_t, Args&& ... args) = delete;
 
     // Copy constructors.
     shared(const shared& other) noexcept (parent::IsOptional)
