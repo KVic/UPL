@@ -4,7 +4,7 @@ The Unified Pointer Library (UPL) contains concepts and implementations of smart
 
 UPL provides advanced semantics for concepts of ownership and management of the object lifetime, compared to smart pointers from the C++ Standard Library. More attention is paid to objects with unique ownership (weak references to them, extending the lifetime in a given scope, the ability to transfer to functors that require copying arguments (lambda, std::function)), pointers with a multiplicity of 1 are added (exactly contain one object), and other features.
 
-Pointers from UPL are not a replacement for smart pointers from the C++ Standard Library and can be used together with them (of course, at the same time an object can be managed by only one library). UPL is intended for cases when there is not enough functionality of smart pointers from the C++ Standard Library and additional capabilities are required.
+Pointers from UPL are not a replacement for smart pointers from the C++ Standard Library and can be used together with them. The current realization of the UPL pointers is implemented as wrappers over the std :: shared_ptr and std :: weak_ptr pointers. This means that the performance of UPL pointers is the same as std :: shared_ptr/weak_ptr, and it is also possible to integrate them. UPL pointers can be created from pointers of the standard C ++ library. In the opposite direction, only std::shared_ptr can be created from upl::shared. UPL is intended for cases when there is not enough functionality of smart pointers from the C++ Standard Library and additional capabilities are required.
 
 UPL is a header-only library.
 
