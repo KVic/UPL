@@ -626,7 +626,7 @@ public:
     template <class Y, UPL_CONCEPT_REQUIRES_(IsConstIncorrect<Y>)>
     unified(Y*) = delete;
 
-    // In-place constructors.
+    // Itself constructors.
     template <class ... Args, UPL_CONCEPT_REQUIRES_(!std::is_abstract_v<T>)>
     explicit unified(itself_t, Args&& ... args)
         : unified<T, multiplicity_type>{new T(std::forward<Args>(args) ...)}
@@ -634,6 +634,21 @@ public:
 
     template <class ... Args, UPL_CONCEPT_REQUIRES_(std::is_abstract_v<T>)>
     unified(itself_t, Args&& ... args) = delete;
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(  IsCompatible<Y>
+                                                            && !std::is_abstract_v<Y>)>
+    explicit unified(itself_type_t<Y>, Args&& ... args)
+        : unified<T, multiplicity_type>{new Y(std::forward<Args>(args) ...)}
+    {}
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(IsIncompatible<Y>)>
+    unified(itself_type_t<Y>, Args&& ... args) = delete;
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(IsConstIncorrect<Y>)>
+    unified(itself_type_t<Y>, Args&& ... args) = delete;
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(std::is_abstract_v<Y>)>
+    unified(itself_type_t<Y>, Args&& ... args) = delete;
 
     // Copy constructors.
     unified(const unified& other) noexcept (parent::IsOptional)
@@ -846,7 +861,7 @@ public:
     template <class Y, UPL_CONCEPT_REQUIRES_(IsConstIncorrect<Y>)>
     unique(Y*) = delete;
 
-    // In-place constructors.
+    // Itself constructors.
     template <class ... Args, UPL_CONCEPT_REQUIRES_(!std::is_abstract_v<T>)>
     explicit unique(itself_t, Args&& ... args)
         : unique<T, multiplicity_type>{new T(std::forward<Args>(args) ...)}
@@ -854,6 +869,21 @@ public:
 
     template <class ... Args, UPL_CONCEPT_REQUIRES_(std::is_abstract_v<T>)>
     unique(itself_t, Args&& ... args) = delete;
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(  IsCompatible<Y>
+                                                            && !std::is_abstract_v<Y>)>
+    explicit unique(itself_type_t<Y>, Args&& ... args)
+        : unique<T, multiplicity_type>{new Y(std::forward<Args>(args) ...)}
+    {}
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(IsIncompatible<Y>)>
+    unique(itself_type_t<Y>, Args&& ... args) = delete;
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(IsConstIncorrect<Y>)>
+    unique(itself_type_t<Y>, Args&& ... args) = delete;
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(std::is_abstract_v<Y>)>
+    unique(itself_type_t<Y>, Args&& ... args) = delete;
 
     // Copy constructors.
     unique(const unique& other) = delete;
@@ -1027,7 +1057,7 @@ public:
     template <class Y, UPL_CONCEPT_REQUIRES_(IsConstIncorrect<Y>)>
     shared(Y*) = delete;
 
-    // In-place constructors.
+    // Itself constructors.
     template <class ... Args, UPL_CONCEPT_REQUIRES_(!std::is_abstract_v<T>)>
     explicit shared(itself_t, Args&& ... args)
         : shared<T, multiplicity_type>{new T(std::forward<Args>(args) ...)}
@@ -1035,6 +1065,21 @@ public:
 
     template <class ... Args, UPL_CONCEPT_REQUIRES_(std::is_abstract_v<T>)>
     shared(itself_t, Args&& ... args) = delete;
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(  IsCompatible<Y>
+                                                            && !std::is_abstract_v<Y>)>
+    explicit shared(itself_type_t<Y>, Args&& ... args)
+        : shared<T, multiplicity_type>{new Y(std::forward<Args>(args) ...)}
+    {}
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(IsIncompatible<Y>)>
+    shared(itself_type_t<Y>, Args&& ... args) = delete;
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(IsConstIncorrect<Y>)>
+    shared(itself_type_t<Y>, Args&& ... args) = delete;
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(std::is_abstract_v<Y>)>
+    shared(itself_type_t<Y>, Args&& ... args) = delete;
 
     // Copy constructors.
     shared(const shared& other) noexcept (parent::IsOptional)

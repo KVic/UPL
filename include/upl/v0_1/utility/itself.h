@@ -33,9 +33,18 @@ struct itself_t
     explicit itself_t() = default;
 };
 
+template <class T>
+struct itself_type_t
+{
+    explicit itself_type_t() = default;
+};
+
 namespace
 {
 inline constexpr itself_t itself{};
+
+template <class T>
+inline constexpr itself_type_t<T> itself_type{};
 } // namespace
 } // namespace v0_1
 } // namespace upl

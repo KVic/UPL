@@ -384,13 +384,27 @@ public:
     template <class Y, UPL_CONCEPT_REQUIRES_(IsConstIncorrect<T, Y>)>
     strict(Y* p) = delete;
 
-    // In-place constructors.
+    // Itself constructors.
     template <class ... Args, UPL_CONCEPT_REQUIRES_(!std::is_abstract_v<T>)>
     explicit strict(itself_t, Args&& ... args)
         : parent{std::make_shared<T>(std::forward<Args>(args) ...)} {}
 
     template <class ... Args, UPL_CONCEPT_REQUIRES_(std::is_abstract_v<T>)>
     strict(itself_t, Args&& ... args) = delete;
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(  IsCompatible<T, Y>
+                                                            && !std::is_abstract_v<Y>)>
+    explicit strict(itself_type_t<Y>, Args&& ... args)
+        : parent{std::make_shared<Y>(std::forward<Args>(args) ...)} {}
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(IsIncompatible<T, Y>)>
+    strict(itself_type_t<Y>, Args&& ... args) = delete;
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(IsConstIncorrect<T, Y>)>
+    strict(itself_type_t<Y>, Args&& ... args) = delete;
+
+    template <class Y, class ... Args, UPL_CONCEPT_REQUIRES_(std::is_abstract_v<Y>)>
+    strict(itself_type_t<Y>, Args&& ... args) = delete;
 
 protected:
     using parent::strong;
