@@ -28,6 +28,7 @@
 
 namespace std
 {
+
 template <class T, class Multiplicity>
 struct hash<upl::detail::counted::internal::strong<T, Multiplicity>>
 {
@@ -54,4 +55,5 @@ struct hash<upl::detail::counted::unique<T, Multiplicity>>
 template <class T, class Multiplicity>
 struct hash<upl::detail::counted::shared<T, Multiplicity>>
     : public hash<upl::detail::counted::internal::strong<T, Multiplicity>> {};
+
 } // namespace std

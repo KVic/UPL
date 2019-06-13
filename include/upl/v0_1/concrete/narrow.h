@@ -28,10 +28,13 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 namespace narrow
 {
+
 using std_smart::pointer;
 using std_smart::weak;
 using std_smart::unified;
@@ -45,6 +48,9 @@ using std_smart::weak_single;
 using std_smart::unified_single;
 using std_smart::unique_single;
 using std_smart::shared_single;
+
 } // namespace narrow
+
 } // namespace v0_1
+
 } // namespace upl

@@ -26,21 +26,28 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 namespace internal
 {
+
 namespace tag
 {
+
 struct owner_based {};
 struct strong : public owner_based {};
 struct weak : public owner_based {};
 struct strict : public strong {};
+
 } // namespace tag
+
 } // namespace internal
 
 namespace tag
 {
+
 struct any {};
 
 using weak = internal::tag::weak;
@@ -50,6 +57,9 @@ struct shared : public internal::tag::strict {};
 
 struct optional {};
 struct single {};
+
 } // namespace tag
+
 } // namespace v0_1
+
 } // namespace upl

@@ -26,8 +26,10 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 struct itself_t
 {
     explicit itself_t() = default;
@@ -41,10 +43,14 @@ struct itself_type_t
 
 namespace
 {
+
 inline constexpr itself_t itself{};
 
 template <class T>
 inline constexpr itself_type_t<T> itself_type{};
+
 } // namespace
+
 } // namespace v0_1
+
 } // namespace upl

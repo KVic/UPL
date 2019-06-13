@@ -30,10 +30,13 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 namespace trait
 {
+
 template <class T, class Multiplicity>
 struct element<upl::detail::std_smart::weak<T, Multiplicity>>
 { using type = typename upl::detail::std_smart::weak<T, Multiplicity>::element_type; };
@@ -81,6 +84,9 @@ struct multiplicity<upl::detail::std_smart::unique<T, Multiplicity_>>
 template <class T, class Multiplicity_>
 struct multiplicity<upl::detail::std_smart::shared<T, Multiplicity_>>
 { using type = Multiplicity_; };
+
 } // namespace trait
+
 } // inline namespace v0_1
+
 } // namespace upl

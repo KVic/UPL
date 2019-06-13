@@ -28,12 +28,16 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 namespace detail
 {
+
 namespace std_smart
 {
+
 template <class T, class Multiplicity>
 inline void swap(shared<T, Multiplicity>& a,
                  shared<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
@@ -53,7 +57,11 @@ template <class T, class Multiplicity>
 inline void swap(weak<T, Multiplicity>& a,
                  weak<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
 { a.swap(b); }
+
 } // namespace std_smart
+
 } // namespace detail
+
 } // namespace v0_1
+
 } // namespace upl

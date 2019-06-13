@@ -30,14 +30,19 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 namespace detail
 {
+
 namespace std_smart
 {
+
 namespace internal
 {
+
 template <class T, class TM, class U, class UM>
 inline bool operator==(const strong<T, TM>& a,
                        const strong<U, UM>& b) noexcept
@@ -138,8 +143,13 @@ template <class T, class TM>
 inline bool
 operator>=(std::nullptr_t, const strong<T, TM>& a) noexcept
 { return !(nullptr < a); }
+
 } // namespace internal
+
 } // namespace std_smart
+
 } // namespace detail
+
 } // namespace v0_1
+
 } // namespace upl

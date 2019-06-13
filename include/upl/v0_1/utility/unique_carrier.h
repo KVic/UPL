@@ -30,8 +30,10 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 template <class T>
 class unique_carrier
 {
@@ -74,5 +76,7 @@ private:
 
 template <class T>
 unique_carrier(T &&)->unique_carrier<T>;
+
 } // namespace v0_1
+
 } // namespace upl

@@ -38,14 +38,19 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 namespace detail
 {
+
 namespace counted
 {
+
 namespace internal
 {
+
 struct owner_counters
 {
     static const std::size_t unique_magic =
@@ -176,6 +181,7 @@ private:
 
 namespace
 {
+
 template <class T, class Y>
 inline constexpr bool IsCompatible = std::is_convertible_v<Y*, T*>;
 
@@ -198,6 +204,7 @@ static constexpr bool IsOptional =
 template <class Multiplicity>
 static constexpr bool IsSingle =
     std::is_same_v<Multiplicity, tag::single>;
+
 } // namespace
 
 template <template <class Y, class M> class Counted, class Y, class M>
@@ -584,6 +591,7 @@ protected:
     using parent::base;
     using parent::operator=;
 };
+
 } // namespace internal
 
 template <class T, class Multiplicity>
@@ -1368,7 +1376,11 @@ public:
     void swap(weak& other) noexcept (parent::IsOptional)
     { parent::swap(other); }
 };
+
 } // namespace counted
+
 } // namespace detail
+
 } // namespace v0_1
+
 } // namespace upl

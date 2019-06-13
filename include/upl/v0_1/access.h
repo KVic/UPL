@@ -30,10 +30,13 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 namespace
 {
+
 template <class P, UPL_CONCEPT_REQUIRES_(StrongPointer<std::decay_t<P>>)>
 inline
 const P& access(const P& p)
@@ -69,6 +72,9 @@ auto access(P&& p,
     else
         return failure_action();
 }
+
 } // namespace
+
 } // namespace v0_1
+
 } // namespace upl

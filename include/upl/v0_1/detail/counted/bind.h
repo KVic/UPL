@@ -28,14 +28,19 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 namespace detail
 {
+
 namespace counted
 {
+
 namespace bind
 {
+
 template <class T, class Ownership, class Multiplicity>
 struct pointer
 {
@@ -61,8 +66,13 @@ struct pointer<T, tag::shared, Multiplicity>
 
 template <class T, class Ownership, class Multiplicity>
 using pointer_t = typename pointer<T, Ownership, Multiplicity>::type;
+
 } // namespace bind
+
 } // namespace counted
+
 } // namespace detail
+
 } // namespace v0_1
+
 } // namespace upl
