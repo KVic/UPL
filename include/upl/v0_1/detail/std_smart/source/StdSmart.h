@@ -35,16 +35,22 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 namespace detail
 {
+
 namespace std_smart
 {
+
 namespace internal
 {
+
 namespace
 {
+
 template <class T, class Y>
 inline constexpr bool IsCompatible = std::is_convertible_v<Y*, T*>;
 
@@ -67,6 +73,7 @@ static constexpr bool IsOptional =
 template <class Multiplicity>
 static constexpr bool IsSingle =
     std::is_same_v<Multiplicity, tag::single>;
+
 } // namespace
 
 template <template <class Y, class M> class StdSmart, class Y, class M>
@@ -547,6 +554,7 @@ private:
 
     Referrer m_referrer;
 };
+
 } // namespace internal
 
 template <class T, class Multiplicity>
@@ -1279,7 +1287,11 @@ public:
     void swap(weak& other) noexcept (parent::IsOptional)
     { parent::swap(other); }
 };
+
 } // namespace std_smart
+
 } // namespace detail
+
 } // namespace v0_1
+
 } // namespace upl

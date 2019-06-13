@@ -28,8 +28,12 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 using namespace narrow;
+
 } // namespace v0_1
+
 } // namespace upl

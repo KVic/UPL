@@ -28,10 +28,13 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 namespace wide
 {
+
 using counted::pointer;
 using counted::weak;
 using counted::unified;
@@ -45,6 +48,9 @@ using counted::weak_single;
 using counted::unified_single;
 using counted::unique_single;
 using counted::shared_single;
+
 } // namespace wide
+
 } // namespace v0_1
+
 } // namespace upl

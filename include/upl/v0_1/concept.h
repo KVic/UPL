@@ -32,12 +32,16 @@
 
 namespace upl
 {
+
 inline namespace v0_1
 {
+
 namespace internal
 {
+
 namespace
 {
+
 template <class P, class T>
 UPL_CONCEPT_SPECIFIER PointerOfElement =
     std::is_same_v<T, void>
@@ -55,11 +59,14 @@ UPL_CONCEPT_SPECIFIER OwnershipPointer =
 template <class P, class Multiplicity>
 UPL_CONCEPT_SPECIFIER MultiplicityPointer =
     std::is_base_of_v<Multiplicity, trait::multiplicity_t<P>>;
+
 } // namespace
+
 } // namespace internal
 
 namespace
 {
+
 template <class P, class Ownership, class Multiplicity>
 UPL_CONCEPT_SPECIFIER BasePointer =
     (  (  std::is_same_v<Ownership, upl::tag::any>
@@ -114,6 +121,9 @@ UPL_CONCEPT_SPECIFIER SinglePointer =
     internal::BasePointer<P>
     && internal::MultiplicityPointer<P, tag::single>
     && internal::PointerOfElement<P, T>;
+
 } // namespace
+
 } // namespace v0_1
+
 } // namespace upl
