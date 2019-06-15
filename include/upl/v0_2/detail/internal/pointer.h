@@ -24,11 +24,11 @@
 
 #pragma once
 
-#include <upl/v0_1/tag.h>
-#include <upl/v0_1/exception.h>
-#include <upl/v0_1/utility/itself.h>
+#include <upl/v0_2/tag.h>
+#include <upl/v0_2/exception.h>
+#include <upl/v0_2/utility/itself.h>
 
-#include "Utility/Concept.h"
+#include "utility/concept.h"
 
 #include <memory>
 #include <cassert>
@@ -36,13 +36,10 @@
 namespace upl
 {
 
-inline namespace v0_1
+inline namespace v0_2
 {
 
 namespace detail
-{
-
-namespace std_smart
 {
 
 namespace internal
@@ -67,11 +64,11 @@ inline constexpr bool IsConstIncorrect =
                     std::remove_const_t<Y>>;
 
 template <class Multiplicity>
-static constexpr bool IsOptional =
+inline constexpr bool IsOptional =
     std::is_same_v<Multiplicity, tag::optional>;
 
 template <class Multiplicity>
-static constexpr bool IsSingle =
+inline constexpr bool IsSingle =
     std::is_same_v<Multiplicity, tag::single>;
 
 } // namespace
@@ -1288,10 +1285,8 @@ public:
     { parent::swap(other); }
 };
 
-} // namespace std_smart
-
 } // namespace detail
 
-} // namespace v0_1
+} // namespace v0_2
 
 } // namespace upl

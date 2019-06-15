@@ -24,55 +24,33 @@
 
 #pragma once
 
-#include <upl/v0_1/detail/std_smart/source/StdSmart.h>
-
 namespace upl
 {
 
-inline namespace v0_1
+inline namespace v0_2
 {
 
-namespace detail
+struct itself_t
 {
-
-namespace std_smart
-{
-
-namespace bind
-{
-
-template <class T, class Ownership, class Multiplicity>
-struct pointer
-{
-    static_assert(sizeof(T) == -1,
-                  "pointer is not defined for the T");
+    explicit itself_t() = default;
 };
 
-template <class T, class Multiplicity>
-struct pointer<T, tag::weak, Multiplicity>
-{ using type = weak<T, Multiplicity>; };
+template <class T>
+struct itself_type_t
+{
+    explicit itself_type_t() = default;
+};
 
-template <class T, class Multiplicity>
-struct pointer<T, tag::unified, Multiplicity>
-{ using type = unified<T, Multiplicity>; };
+namespace
+{
 
-template <class T, class Multiplicity>
-struct pointer<T, tag::unique, Multiplicity>
-{ using type = unique<T, Multiplicity>; };
+inline constexpr itself_t itself{};
 
-template <class T, class Multiplicity>
-struct pointer<T, tag::shared, Multiplicity>
-{ using type = shared<T, Multiplicity>; };
+template <class T>
+inline constexpr itself_type_t<T> itself_type{};
 
-template <class T, class Ownership, class Multiplicity>
-using pointer_t = typename pointer<T, Ownership, Multiplicity>::type;
+} // namespace
 
-} // namespace bind
-
-} // namespace std_smart
-
-} // namespace detail
-
-} // namespace v0_1
+} // namespace v0_2
 
 } // namespace upl

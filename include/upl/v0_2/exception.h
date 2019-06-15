@@ -24,42 +24,32 @@
 
 #pragma once
 
+#include <stdexcept>
+
 namespace upl
 {
 
-inline namespace v0_1
+inline namespace v0_2
 {
 
-namespace internal
-{
+struct logic_error : public std::logic_error
+{ using std::logic_error::logic_error; };
 
-namespace tag
-{
+struct strong_error : public logic_error
+{ using logic_error::logic_error; };
 
-struct owner_based {};
-struct strong : public owner_based {};
-struct weak : public owner_based {};
-struct strict : public strong {};
+struct weak_error : public logic_error
+{ using logic_error::logic_error; };
 
-} // namespace tag
+struct unique_error : public strong_error
+{ using strong_error::strong_error; };
 
-} // namespace internal
+struct shared_error : public strong_error
+{ using strong_error::strong_error; };
 
-namespace tag
-{
+struct single_error : public logic_error
+{ using logic_error::logic_error; };
 
-struct any {};
-
-using weak = internal::tag::weak;
-struct unified : public internal::tag::strong {};
-struct unique : public internal::tag::strict {};
-struct shared : public internal::tag::strict {};
-
-struct optional {};
-struct single {};
-
-} // namespace tag
-
-} // namespace v0_1
+} // namespace v0_2
 
 } // namespace upl

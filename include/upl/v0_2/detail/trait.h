@@ -24,69 +24,69 @@
 
 #pragma once
 
-#include <upl/v0_1/trait.h>
+#include <upl/v0_2/trait.h>
 
-#include <upl/v0_1/detail/std_smart/source/StdSmart.h>
+#include <upl/v0_2/detail/internal/pointer.h>
 
 namespace upl
 {
 
-inline namespace v0_1
+inline namespace v0_2
 {
 
 namespace trait
 {
 
 template <class T, class Multiplicity>
-struct element<upl::detail::std_smart::weak<T, Multiplicity>>
-{ using type = typename upl::detail::std_smart::weak<T, Multiplicity>::element_type; };
+struct element<upl::detail::weak<T, Multiplicity>>
+{ using type = typename upl::detail::weak<T, Multiplicity>::element_type; };
 
 template <class T, class Multiplicity>
-struct element<upl::detail::std_smart::unified<T, Multiplicity>>
-{ using type = typename upl::detail::std_smart::unified<T, Multiplicity>::element_type; };
+struct element<upl::detail::unified<T, Multiplicity>>
+{ using type = typename upl::detail::unified<T, Multiplicity>::element_type; };
 
 template <class T, class Multiplicity>
-struct element<upl::detail::std_smart::unique<T, Multiplicity>>
-{ using type = typename upl::detail::std_smart::unique<T, Multiplicity>::element_type; };
+struct element<upl::detail::unique<T, Multiplicity>>
+{ using type = typename upl::detail::unique<T, Multiplicity>::element_type; };
 
 template <class T, class Multiplicity>
-struct element<upl::detail::std_smart::shared<T, Multiplicity>>
-{ using type = typename upl::detail::std_smart::shared<T, Multiplicity>::element_type; };
+struct element<upl::detail::shared<T, Multiplicity>>
+{ using type = typename upl::detail::shared<T, Multiplicity>::element_type; };
 
 template <class T, class Multiplicity>
-struct ownership<upl::detail::std_smart::weak<T, Multiplicity>>
+struct ownership<upl::detail::weak<T, Multiplicity>>
 { using type = tag::weak; };
 
 template <class T, class Multiplicity>
-struct ownership<upl::detail::std_smart::unified<T, Multiplicity>>
+struct ownership<upl::detail::unified<T, Multiplicity>>
 { using type = tag::unified; };
 
 template <class T, class Multiplicity>
-struct ownership<upl::detail::std_smart::unique<T, Multiplicity>>
+struct ownership<upl::detail::unique<T, Multiplicity>>
 { using type = tag::unique; };
 
 template <class T, class Multiplicity>
-struct ownership<upl::detail::std_smart::shared<T, Multiplicity>>
+struct ownership<upl::detail::shared<T, Multiplicity>>
 { using type = tag::shared; };
 
 template <class T, class Multiplicity_>
-struct multiplicity<upl::detail::std_smart::weak<T, Multiplicity_>>
+struct multiplicity<upl::detail::weak<T, Multiplicity_>>
 { using type = Multiplicity_; };
 
 template <class T, class Multiplicity_>
-struct multiplicity<upl::detail::std_smart::unified<T, Multiplicity_>>
+struct multiplicity<upl::detail::unified<T, Multiplicity_>>
 { using type = Multiplicity_; };
 
 template <class T, class Multiplicity_>
-struct multiplicity<upl::detail::std_smart::unique<T, Multiplicity_>>
+struct multiplicity<upl::detail::unique<T, Multiplicity_>>
 { using type = Multiplicity_; };
 
 template <class T, class Multiplicity_>
-struct multiplicity<upl::detail::std_smart::shared<T, Multiplicity_>>
+struct multiplicity<upl::detail::shared<T, Multiplicity_>>
 { using type = Multiplicity_; };
 
 } // namespace trait
 
-} // inline namespace v0_1
+} // inline namespace v0_2
 
 } // namespace upl

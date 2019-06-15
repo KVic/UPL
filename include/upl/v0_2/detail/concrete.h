@@ -24,33 +24,55 @@
 
 #pragma once
 
+#include <upl/v0_2/detail/bind.h>
+
 namespace upl
 {
 
-inline namespace v0_1
+inline namespace v0_2
 {
 
-struct itself_t
-{
-    explicit itself_t() = default;
-};
+template <class T,
+          class Ownership = tag::unified,
+          class Multiplicity = tag::optional>
+using pointer = detail::bind::pointer_t<T, Ownership, Multiplicity>;
+
+template <class T, class Multiplicity = tag::optional>
+using weak = pointer<T, tag::weak, Multiplicity>;
+
+template <class T, class Multiplicity = tag::optional>
+using unified = pointer<T, tag::unified, Multiplicity>;
+
+template <class T, class Multiplicity = tag::optional>
+using unique = pointer<T, tag::unique, Multiplicity>;
+
+template <class T, class Multiplicity = tag::optional>
+using shared = pointer<T, tag::shared, Multiplicity>;
 
 template <class T>
-struct itself_type_t
-{
-    explicit itself_type_t() = default;
-};
-
-namespace
-{
-
-inline constexpr itself_t itself{};
+using weak_optional = weak<T, tag::optional>;
 
 template <class T>
-inline constexpr itself_type_t<T> itself_type{};
+using unified_optional = unified<T, tag::optional>;
 
-} // namespace
+template <class T>
+using unique_optional = unique<T, tag::optional>;
 
-} // namespace v0_1
+template <class T>
+using shared_optional = shared<T, tag::optional>;
+
+template <class T>
+using weak_single = weak<T, tag::single>;
+
+template <class T>
+using unified_single = unified<T, tag::single>;
+
+template <class T>
+using unique_single = unique<T, tag::single>;
+
+template <class T>
+using shared_single = shared<T, tag::single>;
+
+} // namespace v0_2
 
 } // namespace upl

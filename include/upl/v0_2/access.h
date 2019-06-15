@@ -24,36 +24,57 @@
 
 #pragma once
 
-#include "Counted.h"
+#include <upl/v0_2/concept.h>
 
-namespace std
+#include <utility>
+
+namespace upl
 {
 
-template <class T, class Multiplicity>
-struct hash<upl::detail::counted::internal::strong<T, Multiplicity>>
+inline namespace v0_2
 {
-    using pointer_type = upl::detail::counted::internal::strong<T, Multiplicity>;
-    using element_type = typename pointer_type::element_type;
 
-    using argument_type = pointer_type;
-    using result_type   = typename hash<element_type*>::result_type;
+namespace
+{
 
-    result_type operator()(const pointer_type& pointer) const noexcept
-    {
-        return hash<element_type*>()(pointer.get());
-    }
-};
+template <class P, UPL_CONCEPT_REQUIRES_(StrongPointer<std::decay_t<P>>)>
+inline
+const P& access(const P& p)
+{
+    return p;
+}
 
-template <class T, class Multiplicity>
-struct hash<upl::detail::counted::unified<T, Multiplicity>>
-    : public hash<upl::detail::counted::internal::strong<T, Multiplicity>> {};
+template <class P, UPL_CONCEPT_REQUIRES_(WeakPointer<std::decay_t<P>>)>
+inline
+auto access(P&& p)
+{
+    return p.lock();
+}
 
-template <class T, class Multiplicity>
-struct hash<upl::detail::counted::unique<T, Multiplicity>>
-    : public hash<upl::detail::counted::internal::strong<T, Multiplicity>> {};
+template <class P, class SuccessAction>
+inline
+auto access(P&& p, SuccessAction success_action)
+{
+    const auto& accessor = access(std::forward<P>(p));
+    if (accessor)
+        return success_action(*accessor);
+}
 
-template <class T, class Multiplicity>
-struct hash<upl::detail::counted::shared<T, Multiplicity>>
-    : public hash<upl::detail::counted::internal::strong<T, Multiplicity>> {};
+template <class P, class SuccessAction, class FailureAction>
+inline
+auto access(P&& p,
+            SuccessAction success_action,
+            FailureAction failure_action)
+{
+    const auto& accessor = access(std::forward<P>(p));
+    if (accessor)
+        return success_action(*accessor);
 
-} // namespace std
+    return failure_action();
+}
+
+} // namespace
+
+} // namespace v0_2
+
+} // namespace upl

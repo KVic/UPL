@@ -24,44 +24,36 @@
 
 #pragma once
 
-#include "Counted.h"
+#include "pointer.h"
 
-namespace upl
-{
-
-inline namespace v0_1
-{
-
-namespace detail
-{
-
-namespace counted
+namespace std
 {
 
 template <class T, class Multiplicity>
-inline void swap(shared<T, Multiplicity>& a,
-                 shared<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
-{ a.swap(b); }
+struct hash<upl::detail::internal::strong<T, Multiplicity>>
+{
+    using pointer_type = upl::detail::internal::strong<T, Multiplicity>;
+    using element_type = typename pointer_type::element_type;
+
+    using argument_type = pointer_type;
+    using result_type   = typename hash<element_type*>::result_type;
+
+    result_type operator()(const pointer_type& pointer) const noexcept
+    {
+        return hash<element_type*>()(pointer.get());
+    }
+};
 
 template <class T, class Multiplicity>
-inline void swap(unique<T, Multiplicity>& a,
-                 unique<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
-{ a.swap(b); }
+struct hash<upl::detail::unified<T, Multiplicity>>
+    : public hash<upl::detail::internal::strong<T, Multiplicity>> {};
 
 template <class T, class Multiplicity>
-inline void swap(unified<T, Multiplicity>& a,
-                 unified<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
-{ a.swap(b); }
+struct hash<upl::detail::unique<T, Multiplicity>>
+    : public hash<upl::detail::internal::strong<T, Multiplicity>> {};
 
 template <class T, class Multiplicity>
-inline void swap(weak<T, Multiplicity>& a,
-                 weak<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
-{ a.swap(b); }
+struct hash<upl::detail::shared<T, Multiplicity>>
+    : public hash<upl::detail::internal::strong<T, Multiplicity>> {};
 
-} // namespace counted
-
-} // namespace detail
-
-} // namespace v0_1
-
-} // namespace upl
+} // namespace std

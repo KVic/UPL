@@ -24,60 +24,47 @@
 
 #pragma once
 
-#include <upl/v0_1/detail/std_smart/bind.h>
-
 namespace upl
 {
 
-inline namespace v0_1
+inline namespace v0_2
 {
 
-namespace std_smart
+namespace trait
 {
 
-template <class T,
-          class Ownership = tag::unified,
-          class Multiplicity = tag::optional>
-using pointer = detail::std_smart::bind::pointer_t<T, Ownership, Multiplicity>;
-
-template <class T, class Multiplicity = tag::optional>
-using weak = pointer<T, tag::weak, Multiplicity>;
-
-template <class T, class Multiplicity = tag::optional>
-using unified = pointer<T, tag::unified, Multiplicity>;
-
-template <class T, class Multiplicity = tag::optional>
-using unique = pointer<T, tag::unique, Multiplicity>;
-
-template <class T, class Multiplicity = tag::optional>
-using shared = pointer<T, tag::shared, Multiplicity>;
+template <class T>
+struct element
+{
+    static_assert(sizeof(T) == -1,
+                  "element is not defined for the T");
+};
 
 template <class T>
-using weak_optional = weak<T, tag::optional>;
+struct ownership
+{
+    static_assert(sizeof(T) == -1,
+                  "ownership is not defined for the T");
+};
 
 template <class T>
-using unified_optional = unified<T, tag::optional>;
+struct multiplicity
+{
+    static_assert(sizeof(T) == -1,
+                  "multiplicity is not defined for the T");
+};
 
 template <class T>
-using unique_optional = unique<T, tag::optional>;
+using element_t = typename element<T>::type;
 
 template <class T>
-using shared_optional = shared<T, tag::optional>;
+using ownership_t = typename ownership<T>::type;
 
 template <class T>
-using weak_single = weak<T, tag::single>;
+using multiplicity_t = typename multiplicity<T>::type;
 
-template <class T>
-using unified_single = unified<T, tag::single>;
+} // namespace trait
 
-template <class T>
-using unique_single = unique<T, tag::single>;
-
-template <class T>
-using shared_single = shared<T, tag::single>;
-
-} // namespace std_smart
-
-} // namespace v0_1
+} // namespace v0_2
 
 } // namespace upl

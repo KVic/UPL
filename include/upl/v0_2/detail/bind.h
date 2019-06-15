@@ -24,33 +24,50 @@
 
 #pragma once
 
-#include <upl/v0_1/detail/counted.h>
+#include <upl/v0_2/detail/internal/pointer.h>
 
 namespace upl
 {
 
-inline namespace v0_1
+inline namespace v0_2
 {
 
-namespace wide
+namespace detail
 {
 
-using counted::pointer;
-using counted::weak;
-using counted::unified;
-using counted::unique;
-using counted::shared;
-using counted::weak_optional;
-using counted::unified_optional;
-using counted::unique_optional;
-using counted::shared_optional;
-using counted::weak_single;
-using counted::unified_single;
-using counted::unique_single;
-using counted::shared_single;
+namespace bind
+{
 
-} // namespace wide
+template <class T, class Ownership, class Multiplicity>
+struct pointer
+{
+    static_assert(sizeof(T) == -1,
+                  "pointer is not defined for the T");
+};
 
-} // namespace v0_1
+template <class T, class Multiplicity>
+struct pointer<T, tag::weak, Multiplicity>
+{ using type = weak<T, Multiplicity>; };
+
+template <class T, class Multiplicity>
+struct pointer<T, tag::unified, Multiplicity>
+{ using type = unified<T, Multiplicity>; };
+
+template <class T, class Multiplicity>
+struct pointer<T, tag::unique, Multiplicity>
+{ using type = unique<T, Multiplicity>; };
+
+template <class T, class Multiplicity>
+struct pointer<T, tag::shared, Multiplicity>
+{ using type = shared<T, Multiplicity>; };
+
+template <class T, class Ownership, class Multiplicity>
+using pointer_t = typename pointer<T, Ownership, Multiplicity>::type;
+
+} // namespace bind
+
+} // namespace detail
+
+} // namespace v0_2
 
 } // namespace upl

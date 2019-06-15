@@ -24,36 +24,39 @@
 
 #pragma once
 
-#include "StdSmart.h"
+#include "pointer.h"
 
-namespace std
+namespace upl
+{
+
+inline namespace v0_2
+{
+
+namespace detail
 {
 
 template <class T, class Multiplicity>
-struct hash<upl::detail::std_smart::internal::strong<T, Multiplicity>>
-{
-    using pointer_type = upl::detail::std_smart::internal::strong<T, Multiplicity>;
-    using element_type = typename pointer_type::element_type;
-
-    using argument_type = pointer_type;
-    using result_type   = typename hash<element_type*>::result_type;
-
-    result_type operator()(const pointer_type& pointer) const noexcept
-    {
-        return hash<element_type*>()(pointer.get());
-    }
-};
+inline void swap(shared<T, Multiplicity>& a,
+                 shared<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
+{ a.swap(b); }
 
 template <class T, class Multiplicity>
-struct hash<upl::detail::std_smart::unified<T, Multiplicity>>
-    : public hash<upl::detail::std_smart::internal::strong<T, Multiplicity>> {};
+inline void swap(unique<T, Multiplicity>& a,
+                 unique<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
+{ a.swap(b); }
 
 template <class T, class Multiplicity>
-struct hash<upl::detail::std_smart::unique<T, Multiplicity>>
-    : public hash<upl::detail::std_smart::internal::strong<T, Multiplicity>> {};
+inline void swap(unified<T, Multiplicity>& a,
+                 unified<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
+{ a.swap(b); }
 
 template <class T, class Multiplicity>
-struct hash<upl::detail::std_smart::shared<T, Multiplicity>>
-    : public hash<upl::detail::std_smart::internal::strong<T, Multiplicity>> {};
+inline void swap(weak<T, Multiplicity>& a,
+                 weak<T, Multiplicity>& b) noexcept (internal::IsOptional<Multiplicity>)
+{ a.swap(b); }
 
-} // namespace std
+} // namespace detail
+
+} // namespace v0_2
+
+} // namespace upl

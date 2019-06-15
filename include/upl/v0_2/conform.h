@@ -24,32 +24,30 @@
 
 #pragma once
 
-#include <stdexcept>
+#include <upl/v0_2/concept.h>
+#include <upl/v0_2/detail/concrete.h>
 
 namespace upl
 {
 
-inline namespace v0_1
+inline namespace v0_2
 {
 
-struct logic_error : public std::logic_error
-{ using std::logic_error::logic_error; };
+namespace conform
+{
 
-struct strong_error : public logic_error
-{ using logic_error::logic_error; };
+template <class T>
+using weak_t = upl::weak<trait::element_t<T>, trait::multiplicity_t<T>>;
 
-struct weak_error : public logic_error
-{ using logic_error::logic_error; };
+template <class P, UPL_CONCEPT_REQUIRES_(upl::Pointer<std::decay_t<P>>)>
+inline
+auto weak(P&& pointer)
+{
+    return weak_t<std::decay_t<P>>{std::forward<P>(pointer)};
+}
 
-struct unique_error : public strong_error
-{ using strong_error::strong_error; };
+} // namespace conform
 
-struct shared_error : public strong_error
-{ using strong_error::strong_error; };
-
-struct single_error : public logic_error
-{ using logic_error::logic_error; };
-
-} // namespace v0_1
+} // namespace v0_2
 
 } // namespace upl

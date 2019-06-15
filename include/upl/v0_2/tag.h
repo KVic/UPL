@@ -27,44 +27,39 @@
 namespace upl
 {
 
-inline namespace v0_1
+inline namespace v0_2
 {
 
-namespace trait
+namespace internal
 {
 
-template <class T>
-struct element
+namespace tag
 {
-    static_assert(sizeof(T) == -1,
-                  "element is not defined for the T");
-};
 
-template <class T>
-struct ownership
+struct owner_based {};
+struct strong : public owner_based {};
+struct weak : public owner_based {};
+struct strict : public strong {};
+
+} // namespace tag
+
+} // namespace internal
+
+namespace tag
 {
-    static_assert(sizeof(T) == -1,
-                  "ownership is not defined for the T");
-};
 
-template <class T>
-struct multiplicity
-{
-    static_assert(sizeof(T) == -1,
-                  "multiplicity is not defined for the T");
-};
+struct any {};
 
-template <class T>
-using element_t = typename element<T>::type;
+using weak = internal::tag::weak;
+struct unified : public internal::tag::strong {};
+struct unique : public internal::tag::strict {};
+struct shared : public internal::tag::strict {};
 
-template <class T>
-using ownership_t = typename ownership<T>::type;
+struct optional {};
+struct single {};
 
-template <class T>
-using multiplicity_t = typename multiplicity<T>::type;
+} // namespace tag
 
-} // namespace trait
-
-} // namespace v0_1
+} // namespace v0_2
 
 } // namespace upl

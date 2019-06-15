@@ -24,16 +24,16 @@
 
 #pragma once
 
-#include <upl/v0_1/tag.h>
-#include <upl/v0_1/trait.h>
-#include <upl/v0_1/detail/std_smart/source/Utility/Concept.h>
+#include <upl/v0_2/tag.h>
+#include <upl/v0_2/trait.h>
+#include <upl/v0_2/detail/internal/utility/concept.h>
 
 #include <type_traits>
 
 namespace upl
 {
 
-inline namespace v0_1
+inline namespace v0_2
 {
 
 namespace internal
@@ -124,6 +124,6 @@ UPL_CONCEPT_SPECIFIER SinglePointer =
 
 } // namespace
 
-} // namespace v0_1
+} // namespace v0_2
 
 } // namespace upl

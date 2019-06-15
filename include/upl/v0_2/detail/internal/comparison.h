@@ -24,20 +24,17 @@
 
 #pragma once
 
-#include "Counted.h"
+#include "pointer.h"
 
 #include <functional>
 
 namespace upl
 {
 
-inline namespace v0_1
+inline namespace v0_2
 {
 
 namespace detail
-{
-
-namespace counted
 {
 
 namespace internal
@@ -146,10 +143,8 @@ operator>=(std::nullptr_t, const strong<T, TM>& a) noexcept
 
 } // namespace internal
 
-} // namespace counted
-
 } // namespace detail
 
-} // namespace v0_1
+} // namespace v0_2
 
 } // namespace upl
