@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Viktor Kireev
+ * Copyright (c) 2018-2019 Viktor Kireev
  * Distributed under the MIT License
  */
 
