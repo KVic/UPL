@@ -1,3 +1,5 @@
+The Unified Pointer Library is obsolete, please migrate to the [C++ Object Token Library](https://gitlab.com/CppObjectTokens/Module/Library/CppOtl).
+
 # UPL: Unified Pointer Library
 
 The Unified Pointer Library (UPL) contains concepts and implementations of smart pointers that are designed to manage the object lifetime. The library provides pointers for unique and shared ownership of objects, weak reference for them, adds a unified type of ownership. The public interface of the pointers from the UPL is similar to the interface of the smart pointers from the C++ Standard Library.
